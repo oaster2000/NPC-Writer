@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>World Anvil App</title>
+    <title>{{current_world.name}}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
 </head>
 <body>
     <div class="header">
         <div class="title">
-            <h1>Welcome {{ name }}.</h1>
+            <h1>Welcome {{ name }}. You are using {{current_world.name}}</h1>
         </div>
         <div class="world">
-            <select name="world" id="worlds">
-            {% for world in worlds %}
-                <option value={{world}}>{{world.name}}</option>
-            {% endfor %}
+            <form action = "/index" method = "post">
+                <select name="world" onchange="this.form.submit()" id="world" selected={{current_world.id}}>
+                    {% for world in worlds %}
+                        <option value={{world.id}} {% if current_world.id == world.id %} selected {% endif %}>{{world.name}}</option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
     </div>
+    <br>
 </body>
 </html>
