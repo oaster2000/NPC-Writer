@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Anvil App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>Welcome {{ name }}.</h1>
+        </div>
+        <div class="world">
+            <select name="world" id="worlds">
+            {% for world in worlds %}
+                <option value={{world}}>{{world.name}}</option>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
