@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{current_world.name}}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
-</head>
-<body>
-    <div class="header">
-        <div class="title">
-            <h1>Welcome {{ name }}. You are using {{current_world.name}}</h1>
-        </div>
-        <div class="world">
-            <form action = "/index" method = "post">
-                <select name="world" onchange="this.form.submit()" id="world" selected={{current_world.id}}>
-                    {% for world in worlds %}
-                        <option value={{world.id}} {% if current_world.id == world.id %} selected {% endif %}>{{world.name}}</option>
-                    {% endfor %}
-                </select>
-            </form>
-        </div>
-    </div>
-    <br>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+  <h1>Welcome to {{current_world.name}}</h1>
+  <div class="button"><a href="/new_article">Create a new Article</a></div>
+{% endblock %}

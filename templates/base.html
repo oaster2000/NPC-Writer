@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NPC Writer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/index.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="title">
+            <div class="Title">NPC Writer</div>
+        </div>
+        <div class="world">
+            <form action = "/" method = "post">
+                <select name="world" onchange="this.form.submit()" id="world" selected={{current_world.id}}>
+                    {% for world in worlds %}
+                        <option value={{world.id}} {% if current_world.id == world.id %} selected {% endif %}>{{world.name}}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+</body>
+</html>

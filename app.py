@@ -6,26 +6,25 @@ from anvil import Anvil, User
 load_dotenv()
 
 app = Flask(__name__)
-
 anvil = Anvil()
-
 user = anvil.load_user()
-
 worlds = anvil.load_worlds(user)
-
 anvil.current_world = worlds[0]
 
-@app.route('/')
-def main():
-   return redirect(url_for('index'))
-
-@app.route('/index', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        print(request.form["world"])
         anvil.current_world = anvil.get_world(worlds, request.form["world"])
         
     return render_template('index.html', name=user.name, worlds=worlds, current_world=anvil.current_world)
+
+
+@app.route('/new_article', methods=['POST', 'GET'])
+def new_article():
+    if request.method == 'POST':
+        return redirect(url_for("/"))
+        
+    return render_template('new_article.html', name=user.name, worlds=worlds, current_world=anvil.current_world)
 
 if __name__ == "__main__":
     app.run(debug=True)
